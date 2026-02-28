@@ -32,7 +32,7 @@ pipeline{
 
     stage('Build Docker Image') {
       steps {
-        bat 'docker build -t java-applications:latest .'
+        bat 'docker build -t java-application:latest .'
       }
     }
 
