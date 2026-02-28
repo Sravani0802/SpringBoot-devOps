@@ -13,7 +13,7 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/springboot-java-hibernate-rest-api-0.0.1..jar app.jar
+COPY --from=build /app/target/springboot-java-hibernate-rest-api-0.0.1.jar app.jar
 
 
 EXPOSE 9090
