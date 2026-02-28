@@ -17,9 +17,9 @@ pipeline{
       }
     }
 
-    stage('Clone Java-SpringBoot-App') {
+    stage('Clone SpringBoot-devOps') {
       steps {
-          git branch: 'main', url: 'https://github.com/Sravani0802/Java-SpringBoot-App.git', credentialsId: 'github-creds'
+          git branch: 'main', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
       }
     }
 
