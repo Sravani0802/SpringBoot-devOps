@@ -1,0 +1,46 @@
+pipeline{
+  agent any
+  environment {
+        KUBECONFIG = "C:/Users/SRAVANI/.kube/config"
+  }
+  stages {
+
+    stage('Webhook Test') {
+      steps {
+        echo "GitHub webhook triggered successfully Now!"
+      }
+    }
+
+    stage('Clone Repo') {
+    steps {
+      git branch: 'main',
+          url: 'https://github.com/Sravani0802/Java-SpringBoot-App.git'
+    }
+    }
+    
+    stage('Checkout') {
+    steps {
+        checkout scm
+    }
+}
+
+    stage('Build Maven') {
+        steps {
+            sh 'mvn clean package -DskipTests'
+        }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        bat 'docker build -t java-application:latest .'
+      }
+    }
+
+    stage('Deploy to Kubernetes') {
+      steps {
+        bat 'kubectl apply -f k8s/'
+      }
+    }
+  }
+}
+

@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: PresisentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+accessModes:
+  - ReadWriteOnce
+resources:
+  requests:
+    storage: 2Gi
+
+---
+
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+  spec:
+  containers: 
+    -name: mysql
+    image: mysql:8
+    env:
+      - name: MySQL_Root_Password
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: password
+      - name: MySQL_DATABASE
+        value: student
+    ports:
+      - containerPort: 3306
+    volumeMounts:
+      - mountPath: /var/lib/mysql
+        name: mysql-storage
+  volumes:
+    - name: mysql-storage
+      PresisentVolumeClaim:
+        claimName: mysql-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec: 
+  type: ClusterIP
+  ports:
+    - port:3306
+  selector:
+    app: mysql
