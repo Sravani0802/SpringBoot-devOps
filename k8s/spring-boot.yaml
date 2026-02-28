@@ -15,6 +15,7 @@ spec:
       containers:
         - name: springboot-app
           image:  java-application:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 9090
           env:
