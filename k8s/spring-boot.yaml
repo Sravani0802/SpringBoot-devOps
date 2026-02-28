@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 9090
           env:
+            - name: SERVER_PORT
+              value: "9090" 
             - name: DB_URL
               value: jdbc:mysql://mysql-service:3306/student?useSSL=false&serverTimezone=UTC
             - name: DB_USERNAME
