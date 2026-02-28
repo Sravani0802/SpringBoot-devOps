@@ -13,15 +13,16 @@ pipeline{
 
     stage('Checkout SpringBoot-devOps') {
       steps {
-          git url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
+          git branch: 'main', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
       }
     }
 
     stage('Clone Java-SpringBoot-App') {
-        steps {
-            git url: 'https://github.com/Sravani0802/Java-SpringBoot-App.git', credentialsId: 'github-creds'
-        }
+      steps {
+          git branch: 'main', url: 'https://github.com/Sravani0802/Java-SpringBoot-App.git', credentialsId: 'github-creds'
+      }
     }
+
     
     stage('Checkout') {
     steps {
