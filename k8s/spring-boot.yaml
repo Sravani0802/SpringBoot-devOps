@@ -22,11 +22,11 @@ spec:
             - name: SERVER_PORT
               value: "9090" 
             - name: DB_URL
-              value: jdbc:mysql://mysql-service:3306/student?useSSL=false&serverTimezone=UTC
+              value: "jdbc:mysql://mysql-service:3306/student?useSSL=false&serverTimezone=UTC"
             - name: DB_USERNAME
-              value: root
+              value: "root"
             - name: DB_PASSWORD
-              value: 1234
+              value: "1234"
 
 ---
 
