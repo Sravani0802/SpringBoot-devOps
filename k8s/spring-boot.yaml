@@ -24,15 +24,9 @@ spec:
             - name: DB_URL
               value: jdbc:mysql://mysql-service:3306/student?useSSL=false&serverTimezone=UTC
             - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: username
+              value: root
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
+              value: 1234
 
 ---
 
