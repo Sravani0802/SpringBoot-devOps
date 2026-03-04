@@ -22,9 +22,9 @@ public class HibernateUtil {
         String dbUser = System.getenv("DB_USERNAME");
         String dbPass = System.getenv("DB_PASSWORD");
 
-        cfg.setProperty("hibernate.connection.url", dbUrl);
-        cfg.setProperty("hibernate.connection.username", dbUser);
-        cfg.setProperty("hibernate.connection.password", dbPass);
+        configuration.setProperty("hibernate.connection.url", dbUrl);
+        configuration.setProperty("hibernate.connection.username", dbUser);
+        configuration.setProperty("hibernate.connection.password", dbPass);
 
         sessionFactory = configuration.buildSessionFactory();
     }
