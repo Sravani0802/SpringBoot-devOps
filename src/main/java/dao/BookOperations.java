@@ -4,6 +4,8 @@ import dto.bookDto;
 import entity.Book;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 /*****
  * Class with CRUD Example w.r.t rest call's
@@ -22,7 +24,10 @@ public class BookOperations {
         List<Book> bookObj = bookDaoObj.getBooks();
 
         if (bookObj.isEmpty()) {
-            return "No books found in database!";
+            System.out.println("No books found in database!");
+            List<String> emptyMsg = new ArrayList<>();
+            emptyMsg.add("No books found in database!");
+            return emptyMsg; // return a list with the message
         }
 
         List<String> titles = new ArrayList<>();

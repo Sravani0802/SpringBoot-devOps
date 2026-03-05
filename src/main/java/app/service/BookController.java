@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.net.URI;
+import java.util.List;
 
 @SpringBootApplication
 @RestController
@@ -24,10 +25,6 @@ public class BookController {
         BookOperations action = new BookOperations();
         List<String> titles = action.getBook();
     
-        if (titles.isEmpty()) {
-            return new ResponseEntity<>(titles, HttpStatus.NO_CONTENT); // 204
-        }
-
         return new ResponseEntity<>(titles, HttpStatus.OK); // 200
         // return new ResponseEntity<>(action.getBook(), HttpStatus.OK); //200
     }
