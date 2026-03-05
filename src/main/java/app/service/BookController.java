@@ -20,9 +20,16 @@ public class BookController {
      *****************/
     @RequestMapping("/book")
     @ResponseBody
-    public ResponseEntity<String> getBook() {
+    public ResponseEntity<List<String>> getBook() {
         BookOperations action = new BookOperations();
-        return new ResponseEntity<>(action.getBook(), HttpStatus.OK); //200
+        List<String> titles = action.getBook();
+    
+        if (titles.isEmpty()) {
+            return new ResponseEntity<>(titles, HttpStatus.NO_CONTENT); // 204
+        }
+
+        return new ResponseEntity<>(titles, HttpStatus.OK); // 200
+        // return new ResponseEntity<>(action.getBook(), HttpStatus.OK); //200
     }
 
     /***************** GET : BookEntity by ID

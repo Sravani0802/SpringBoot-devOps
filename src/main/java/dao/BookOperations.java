@@ -16,7 +16,7 @@ import java.util.List;
  * *****/
 public class BookOperations {
 
-    public String getBook() {
+    public List<String> getBook() {
         System.out.println("\n\nGetting a book from Database now !\n\n");
         BookDao bookDaoObj = new BookDao();
         List<Book> bookObj = bookDaoObj.getBooks();
@@ -24,8 +24,14 @@ public class BookOperations {
         if (bookObj.isEmpty()) {
             return "No books found in database!";
         }
-        System.out.println("\n\n -- READ/SELECT (GET) Operation completed, Book Title : " + bookObj.get(0).getTitle() + " -- \n\n");
-        return bookObj.get(0).getTitle();
+
+        List<String> titles = new ArrayList<>();
+        for (Book b : bookObj) {
+            titles.add(b.getTitle());
+        }
+
+        System.out.println("\n\n -- READ/SELECT (GET) Operation completed, Book Titles : " + titles + " -- \n\n");
+        return titles;
     }
 
     public String fetchBookById(int bookId) {
