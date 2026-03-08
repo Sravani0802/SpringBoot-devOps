@@ -1,8 +1,10 @@
 pipeline{
   agent any
-  environment {
-        KUBECONFIG = "C:/Users/SRAVANI/.kube/config"
-  }
+ environment {
+        AWS_REGION = "ap-south-1"
+        ECR_REPO = "138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app"
+        IMAGE_TAG = "latest"
+    }
   stages {
 
     stage('Webhook Test') {
@@ -13,13 +15,13 @@ pipeline{
 
     stage('Checkout SpringBoot-devOps') {
       steps {
-          git branch: 'main', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
+          git branch: 'master', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
       }
     }
 
     stage('Clone SpringBoot-devOps') {
       steps {
-          git branch: 'main', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
+          git branch: 'master', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
       }
     }
 
@@ -38,15 +40,43 @@ pipeline{
 
     stage('Build Docker Image') {
       steps {
-        bat 'docker build -t java-application:latest .'
+        bat 'docker build -t springboot-app .'
       }
     }
 
-    stage('Deploy to Kubernetes') {
-      steps {
-        bat 'kubectl apply -f k8s/'
-      }
-    }
+    stage('Login to ECR') {
+     steps {
+       bat """
+       aws ecr get-login-password --region %AWS_REGION% | docker login --username AWS --password-stdin %ECR_REPO%
+        """
+     }
+   }
+
+        stage('Tag Docker Image') {
+            steps {
+                bat """
+                docker tag springboot-app %ECR_REPO%:%IMAGE_TAG%
+                """
+            }
+        }
+
+        stage('Push to ECR') {
+            steps {
+                bat """
+                docker push %ECR_REPO%:%IMAGE_TAG%
+                """
+            }
+        }
+
+        stage('Deploy to EKS') {
+            steps {
+                bat """
+                aws eks --region %AWS_REGION% update-kubeconfig --name my-eks-cluster
+                kubectl apply -f k8s/
+                """
+            }
+        }
+
   }
 }
 

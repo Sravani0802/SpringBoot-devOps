@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot-app
-          image:  java-application:latest
-          imagePullPolicy: Never
+          image:  138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:latest
           ports:
             - containerPort: 9090
           env:
