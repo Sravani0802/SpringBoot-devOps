@@ -42,7 +42,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: "false" # public ELB
 spec:
-  type: LoadBalancer
+  type: nodePort
   ports: 
     - protocol: TCP
       port: 9090
