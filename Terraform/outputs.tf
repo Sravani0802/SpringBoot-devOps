@@ -21,3 +21,10 @@ output "public_subnets" {
 output "aws_load_balancer_controller_role_arn" {
   value = aws_iam_role.aws_load_balancer_controller.arn
 }
+
+########################################
+# OUTPUT
+########################################
+output "rds_endpoint" {
+  value = aws_db_instance.mysql.endpoint
+}

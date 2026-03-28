@@ -1,8 +1,14 @@
+### Spring Boot CRUD Application on AWS EKS with RDS
+
+#### 
+
 #### **Project Overview**
 
 
 
-This project demonstrates deploying a Spring Boot CRUD application on AWS Cloud using modern DevOps practices. The application is containerized with Docker, deployed on Kubernetes (EKS), and exposed using an Application Load Balancer (ALB) Ingress Controller.
+
+
+This project demonstrates a \*\*production-ready deployment\*\* of a Spring Boot application using \*\*AWS EKS\*\*, \*\*RDS\*\*, \*\*Terraform\*\*, \*\*Docker\*\*, \*\*Jenkins\*\*, and \*\*GitHub Webhooks\*\*.
 
 
 
@@ -12,26 +18,77 @@ Infrastructure is provisioned using Terraform, ensuring reproducibility and scal
 
 ##### **Architecture**
 
-* Spring Boot Application (CRUD APIs)
-* Docker for containerization
-* Amazon ECR for image storage
-* Amazon EKS for Kubernetes cluster
-* Managed Node Groups for worker nodes
-* AWS ALB Ingress Controller for external access
-* Ephemeral MySQL Database deployed inside Kubernetes
-* Terraform for infrastructure provisioning
+&#x20;                      ┌──────────────────────┐
+
+&#x20;                      │        Users                │
+
+&#x20;                      │   (Browser / Postman)       |
+
+&#x20;                      └─────────┬────────────┘
+
+&#x20;                                   │ HTTP / HTTPS
+
+&#x20;                                   ▼
+
+&#x20;                      ┌──────────────────────┐
+
+&#x20;                      │     ALB Ingress             │
+
+&#x20;                      │  (kubernetes.io/ingress)    │
+
+&#x20;                      └─────────┬────────────┘
+
+&#x20;                                   │
+
+&#x20;                                   ▼
+
+&#x20;                      ┌──────────────────────┐
+
+&#x20;                      │    EKS Cluster Pods         │
+
+&#x20;                      │ Spring Boot Application     │
+
+&#x20;                      │  (Container: Docker)        │
+
+&#x20;                      └─────────┬────────────┘
+
+&#x20;                                   │ JDBC / DB Connection
+
+&#x20;                                   ▼
+
+&#x20;                      ┌──────────────────┐
+
+&#x20;                      │       AWS RDS          │
+
+&#x20;                      │     MySQL Database     │
+
+&#x20;                      │ Persistent Storage     │
+
+&#x20;                      └──────────────────┘
 
 
 
-**Tech Stack**
----
+Terraform Remote Backend:
+
+S3 Bucket → Stores Terraform State
+
+DynamoDB → Locks Terraform State
+
+* **ALB Ingress**: Public entry point to the Spring Boot app.
+* **EKS Pods**: Runs your Spring Boot Docker containers, auto-scalable.
+* **RDS MySQL**: Persistent database with security groups allowing only EKS nodes.
+* **Terraform Remote Backend**: Ensures collaboration \& prevents state corruption.
+
+##### 
+
+##### **Tech Stack**
 
 * Java (Spring Boot)
 * Docker
 * Jenkins
 * Kubernetes (EKS)
 * Terraform
-* AWS Services (ECR, EC2, EKS, ALB)
+* AWS Services (ECR, EC2, EKS, ALB, RDS)
 * MySQL
 
 
@@ -41,11 +98,12 @@ Infrastructure is provisioned using Terraform, ensuring reproducibility and scal
 ##### **Features**
 
 * Full CRUD operations (Create, Read, Update, Delete)
-* Containerized microservice deployment
-* Scalable Kubernetes infrastructure
-* External access via ALB Ingress
-* Infrastructure as Code using Terraform
-* Lightweight ephemeral database setup (for demo purposes)
+* CRUD operations for `student` database.
+* Spring Boot application running in \*\*AWS EKS\*\*.
+* AWS RDS MySQL for persistent database storage.
+* Automated CI/CD with Jenkins and GitHub integration.
+* Secure and private networking between EKS pods and RDS.
+* Terraform remote backend for state management.
 
 
 
@@ -63,8 +121,6 @@ Infrastructure is provisioned using Terraform, ensuring reproducibility and scal
 
 │   ├── ingress.yaml       # ALB Ingress configuration
 
-│   ├── mysql.yaml         # MySQL Deployment \& Service
-
 ├── Dockerfile             # App containerization
 
 ├── JenkinsFile             # CI/CD Pipeline
@@ -81,16 +137,14 @@ This repository contains screenshots for proof of deployment:
 
 
 
-* &#x20;EKS Cluster \& Managed Node Groups
-* &#x20;EC2 Instances (Worker Nodes)
-* &#x20;ECR Repository
-* &#x20;ALB Ingress Endpoint
-* &#x20;Kubernetes Pods \& Services
-* &#x20;CRUD API responses (Postman)
-
-
-
-
+* EKS Cluster \& Managed Node Groups
+* EC2 Instances (Worker Nodes)
+* ECR Repository
+* ALB Ingress Endpoint
+* Kubernetes Pods \& Services
+* CRUD API responses (Postman)
+* RDS Database – Table and Data
+* EKS Pods Running
 
 
 

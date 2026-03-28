@@ -1,0 +1,324 @@
+Started by user Sravani Vuppala
+Obtained JenkinsFile from git https://github.com/Sravani0802/SpringBoot-devOps.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git.exe
+using credential github-creds
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/Sravani0802/SpringBoot-devOps.git # timeout=10
+Fetching upstream changes from https://github.com/Sravani0802/SpringBoot-devOps.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.52.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Sravani0802/SpringBoot-devOps.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master2^{commit}" # timeout=10
+Checking out Revision 88be196ee6fea873f0879bb83bdca3817911b72f (refs/remotes/origin/master2)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 88be196ee6fea873f0879bb83bdca3817911b72f # timeout=10
+Commit message: "updates"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Webhook Test)
+[Pipeline] echo
+GitHub webhook triggered successfully Now!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Checkout SpringBoot-devOps)
+[Pipeline] git
+The recommended git tool is: git.exe
+using credential github-creds
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/Sravani0802/SpringBoot-devOps.git # timeout=10
+Fetching upstream changes from https://github.com/Sravani0802/SpringBoot-devOps.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.52.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Sravani0802/SpringBoot-devOps.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+Checking out Revision 4ca8faccc62fac67f52817aea2d95d0afa31c209 (refs/remotes/origin/master)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 4ca8faccc62fac67f52817aea2d95d0afa31c209 # timeout=10
+ > git.exe branch -a -v --no-abbrev # timeout=10
+ > git.exe branch -D master # timeout=10
+ > git.exe checkout -b master 4ca8faccc62fac67f52817aea2d95d0afa31c209 # timeout=10
+Commit message: "updates"
+ > git.exe rev-list --no-walk 578cd3ab12ad2cd649514334c705bf7131fa2dfd # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Clone SpringBoot-devOps)
+[Pipeline] git
+The recommended git tool is: git.exe
+using credential github-creds
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/Sravani0802/SpringBoot-devOps.git # timeout=10
+Fetching upstream changes from https://github.com/Sravani0802/SpringBoot-devOps.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.52.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Sravani0802/SpringBoot-devOps.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+Checking out Revision 4ca8faccc62fac67f52817aea2d95d0afa31c209 (refs/remotes/origin/master)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 4ca8faccc62fac67f52817aea2d95d0afa31c209 # timeout=10
+ > git.exe branch -a -v --no-abbrev # timeout=10
+ > git.exe branch -D master # timeout=10
+ > git.exe checkout -b master 4ca8faccc62fac67f52817aea2d95d0afa31c209 # timeout=10
+Commit message: "updates"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+The recommended git tool is: git.exe
+using credential github-creds
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/Sravani0802/SpringBoot-devOps.git # timeout=10
+Fetching upstream changes from https://github.com/Sravani0802/SpringBoot-devOps.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.52.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Sravani0802/SpringBoot-devOps.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master2^{commit}" # timeout=10
+Checking out Revision 88be196ee6fea873f0879bb83bdca3817911b72f (refs/remotes/origin/master2)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 88be196ee6fea873f0879bb83bdca3817911b72f # timeout=10
+Commit message: "updates"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Maven)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>mvn clean package -DskipTests 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------< com.github.eaccmk:springboot-java-hibernate-rest-api >--------
+[INFO] Building Spring Boot Java App 0.0.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.1.0:clean (default-clean) @ springboot-java-hibernate-rest-api ---
+[INFO] Deleting C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\target
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ springboot-java-hibernate-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ springboot-java-hibernate-rest-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\target\classes
+[INFO] /C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Pipeline/src/main/java/dao/BookDao.java: C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\src\main\java\dao\BookDao.java uses or overrides a deprecated API.
+[INFO] /C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Pipeline/src/main/java/dao/BookDao.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Pipeline/src/main/java/dao/BookDao.java: C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\src\main\java\dao\BookDao.java uses unchecked or unsafe operations.
+[INFO] /C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Pipeline/src/main/java/dao/BookDao.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ springboot-java-hibernate-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ springboot-java-hibernate-rest-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\target\test-classes
+[INFO] 
+[INFO] --- surefire:2.22.2:test (default-test) @ springboot-java-hibernate-rest-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.2.0:jar (default-jar) @ springboot-java-hibernate-rest-api ---
+[INFO] Building jar: C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline\target\springboot-java-hibernate-rest-api-0.0.1.jar
+[INFO] 
+[INFO] --- spring-boot:2.3.0.RELEASE:repackage (repackage) @ springboot-java-hibernate-rest-api ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  36.745 s
+[INFO] Finished at: 2026-03-28T13:06:01+05:30
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>docker build -t springboot-app . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 403B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:17-jdk-alpine
+#2 ...
+
+#3 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-17
+#3 DONE 2.4s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:17-jdk-alpine
+#2 DONE 2.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-17@sha256:39a5260d49fe20e5f407bf63f63a267d9870965bcd1d114e52e1e50ba1c55a32
+#6 resolve docker.io/library/maven:3.9-eclipse-temurin-17@sha256:39a5260d49fe20e5f407bf63f63a267d9870965bcd1d114e52e1e50ba1c55a32 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:17-jdk-alpine@sha256:903e865ecd125a01759fd156d042b998aa86957262f6dec4745125a47bd4f882
+#7 resolve docker.io/library/eclipse-temurin:17-jdk-alpine@sha256:903e865ecd125a01759fd156d042b998aa86957262f6dec4745125a47bd4f882 0.1s done
+#7 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 989B 0.0s done
+#5 DONE 0.0s
+
+#8 [stage-1 2/3] WORKDIR /app
+#8 CACHED
+
+#9 [build 6/6] RUN mvn clean package -DskipTests
+#9 CACHED
+
+#10 [build 2/6] WORKDIR /app
+#10 CACHED
+
+#11 [build 3/6] COPY pom.xml .
+#11 CACHED
+
+#12 [build 4/6] RUN mvn dependency:go-offline -B
+#12 CACHED
+
+#13 [build 5/6] COPY src ./src
+#13 CACHED
+
+#14 [stage-1 3/3] COPY --from=build /app/target/springboot-java-hibernate-rest-api-0.0.1.jar app.jar
+#14 CACHED
+
+#15 exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:b01e9ec08ed254d989815f39ed8d0514beb6b4759d401366110d358ec427d234 done
+#15 exporting config sha256:56d2d44f4d0416085bdd02967cfd780beb5aa0f45c5d5f9c3a71b4bb09b26d95
+#15 exporting config sha256:56d2d44f4d0416085bdd02967cfd780beb5aa0f45c5d5f9c3a71b4bb09b26d95 done
+#15 exporting attestation manifest sha256:b33f23537c90aea98637dae87a01d43e042cce152ffd4a95a41b0399de580e9a 0.1s done
+#15 exporting manifest list sha256:aa513c9687091f0806a1c78e5ceae73dd2cdb8c827b7459c93c40519c9e16a4f
+#15 exporting manifest list sha256:aa513c9687091f0806a1c78e5ceae73dd2cdb8c827b7459c93c40519c9e16a4f 0.1s done
+#15 naming to docker.io/library/springboot-app:latest 0.0s done
+#15 unpacking to docker.io/library/springboot-app:latest 0.0s done
+#15 DONE 0.3s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Login to ECR)
+[Pipeline] withCredentials
+Masking supported pattern matches of %AWS_ACCESS_KEY_ID% or %AWS_SECRET_ACCESS_KEY%
+[Pipeline] {
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>aws ecr get-login-password --region ap-south-1   | docker login --username AWS --password-stdin 138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app 
+Login Succeeded
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tag Docker Image)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>docker tag springboot-app 138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:latest 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to ECR)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>docker push 138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:latest 
+The push refers to repository [138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app]
+7cd2436f004e: Waiting
+82c540078c28: Waiting
+589002ba0eae: Waiting
+946c51efe0fd: Waiting
+fc23c681df7d: Waiting
+c02637adf3e3: Waiting
+1120f7bd8ade: Waiting
+3a547da4fe15: Waiting
+3a547da4fe15: Waiting
+7cd2436f004e: Waiting
+82c540078c28: Waiting
+589002ba0eae: Waiting
+946c51efe0fd: Waiting
+fc23c681df7d: Waiting
+c02637adf3e3: Waiting
+1120f7bd8ade: Waiting
+946c51efe0fd: Waiting
+fc23c681df7d: Waiting
+c02637adf3e3: Waiting
+1120f7bd8ade: Waiting
+3a547da4fe15: Waiting
+7cd2436f004e: Waiting
+82c540078c28: Waiting
+589002ba0eae: Waiting
+fc23c681df7d: Waiting
+c02637adf3e3: Waiting
+1120f7bd8ade: Waiting
+3a547da4fe15: Waiting
+82c540078c28: Waiting
+589002ba0eae: Waiting
+946c51efe0fd: Waiting
+946c51efe0fd: Pushed
+fc23c681df7d: Pushed
+7cd2436f004e: Pushed
+c02637adf3e3: Pushed
+589002ba0eae: Pushed
+3a547da4fe15: Pushed
+1120f7bd8ade: Pushed
+82c540078c28: Pushed
+latest: digest: sha256:aa513c9687091f0806a1c78e5ceae73dd2cdb8c827b7459c93c40519c9e16a4f size: 856
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to EKS)
+[Pipeline] withCredentials
+Masking supported pattern matches of %AWS_ACCESS_KEY_ID% or %AWS_SECRET_ACCESS_KEY%
+[Pipeline] {
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>aws eks --region ap-south-1 update-kubeconfig --name demo-alb-cluster 
+Updated context arn:aws:eks:ap-south-1:138383657739:cluster/demo-alb-cluster in C:\WINDOWS\system32\config\systemprofile\.kube\config
+
+C:\ProgramData\Jenkins\.jenkins\workspace\SpringBoot-Pipeline>kubectl apply -f k8s/ 
+ingress.networking.k8s.io/springboot-ingress unchanged
+secret/mysql-secret created
+deployment.apps/springboot-app created
+service/springboot-service created
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
