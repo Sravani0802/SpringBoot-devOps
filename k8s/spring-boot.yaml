@@ -21,7 +21,7 @@ spec:
             - name: SERVER_PORT
               value: "9090" 
             - name: DB_URL
-              value: jdbc:mysql://mysql-service:3306/student?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+              value: jdbc:mysql://springboot-rds.c78482kkuuyb.ap-south-1.rds.amazonaws.com:3306/student?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
