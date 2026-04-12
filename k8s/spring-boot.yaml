@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot-app
-          image:  138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:latest
+          image:  138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:TAG
           ports:
             - containerPort: 9090
           env:
