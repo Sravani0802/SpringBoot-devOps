@@ -75,7 +75,7 @@ pipeline {
                     bat """
                     git config user.name "ci-cd-bot"
                     git config user.email "ci-cd-bot@Devops.com"
-                    git add k8s/deployment.yaml
+                    git add k8s/spring-boot.yaml
                     git commit -m "Update image to %IMAGE_TAG%" || echo No changes to commit
                     git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:main-master
                     """
