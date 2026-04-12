@@ -73,11 +73,11 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     bat """
-                    git config user.name "jenkins"
-                    git config user.email "jenkins@example.com"
+                    git config user.name "ci-cd-bot"
+                    git config user.email "ci-cd-bot@Devops.com"
                     git add k8s/deployment.yaml
                     git commit -m "Update image to %IMAGE_TAG%" || echo No changes to commit
-                    git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:master
+                    git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:main-master
                     """
                 }
             }
