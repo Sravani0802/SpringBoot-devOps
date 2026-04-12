@@ -1,86 +1,95 @@
-pipeline{
-  agent any
-     environment {
-            AWS_REGION = "ap-south-1"
-            ECR_REPO = "138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app"
-            IMAGE_TAG = "latest"
-     }
-  stages {
+pipeline {
+    agent any
 
-    stage('Webhook Test') {
-      steps {
-        echo "GitHub webhook triggered successfully Now!"
-      }
+    environment {
+        AWS_REGION = "ap-south-1"
+        ECR_REPO = "138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app"
+        IMAGE_TAG = "${BUILD_NUMBER}"   // better than latest
     }
 
-    stage('Checkout SpringBoot-devOps') {
-      steps {
-          git branch: 'master', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
-      }
-    }
+    stages {
 
-    stage('Clone SpringBoot-devOps') {
-      steps {
-          git branch: 'master', url: 'https://github.com/Sravani0802/SpringBoot-devOps.git', credentialsId: 'github-creds'
-      }
-    }
-
-    
-    stage('Checkout') {
-    steps {
-        checkout scm
-    }
-}
-
-    stage('Build Maven') {
-        steps {
-            bat 'mvn clean package -DskipTests'
+        stage('Webhook Trigger') {
+            steps {
+                echo "GitHub webhook triggered successfully!"
+            }
         }
-    }
 
-    stage('Build Docker Image') {
-      steps {
-        bat 'docker build -t springboot-app .'
-      }
-    }
-
-    stage('Login to ECR') {
-     steps {
-	    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-cred']]) {
-           bat """
-           aws ecr get-login-password --region %AWS_REGION% | docker login --username AWS --password-stdin %ECR_REPO%
-            """
-     	}
-     }
-   }
-
-    stage('Tag Docker Image') {
-        steps {
-            bat """
-            docker tag springboot-app %ECR_REPO%:%IMAGE_TAG%
-            """
+        stage('Checkout Code') {
+            steps {
+                git branch: 'master',
+                url: 'https://github.com/Sravani0802/SpringBoot-devOps.git',
+                credentialsId: 'github-creds'
+            }
         }
-    }
 
-    stage('Push to ECR') {
-        steps {
-            bat """
-            docker push %ECR_REPO%:%IMAGE_TAG%
-            """
+        stage('Build Maven') {
+            steps {
+                bat 'mvn clean package -DskipTests'
+            }
         }
-    }
 
-    stage('Deploy to EKS') {
-        steps {
-            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-cred']]) {
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t springboot-app .'
+            }
+        }
+
+        stage('Login to ECR') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-cred']]) {
+                    bat """
+                    aws ecr get-login-password --region %AWS_REGION% | docker login --username AWS --password-stdin %ECR_REPO%
+                    """
+                }
+            }
+        }
+
+        stage('Tag Docker Image') {
+            steps {
                 bat """
-                aws eks --region %AWS_REGION% update-kubeconfig --name demo-alb-cluster
-                kubectl apply -f k8s/
+                docker tag springboot-app %ECR_REPO%:%IMAGE_TAG%
                 """
+            }
+        }
+
+        stage('Push to ECR') {
+            steps {
+                bat """
+                docker push %ECR_REPO%:%IMAGE_TAG%
+                """
+            }
+        }
+
+        stage('Update K8s Manifest') {
+            steps {
+                powershell '''
+                (Get-Content k8s/deployment.yaml) -replace "image: .*", "image: $env:ECR_REPO:$env:IMAGE_TAG" | Set-Content k8s/deployment.yaml
+                '''
+            }
+        }
+
+        stage('Commit & Push to GitHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                    bat """
+                    git config user.name "jenkins"
+                    git config user.email "jenkins@example.com"
+                    git add k8s/deployment.yaml
+                    git commit -m "Update image to %IMAGE_TAG%" || echo No changes to commit
+                    git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:master
+                    """
+                }
             }
         }
     }
 
-  }
+    post {
+        success {
+            echo "Pipeline executed successfully. Argo CD will deploy changes automatically."
+        }
+        failure {
+            echo "Pipeline failed. Check logs."
+        }
+    }
 }
-
