@@ -70,18 +70,25 @@ pipeline {
         }
 
         stage('Commit & Push to GitHub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-                    bat """
-                    git config user.name "ci-cd-bot"
-                    git config user.email "ci-cd-bot@Devops.com"
-                    git add k8s/spring-boot.yaml
-                    git commit -m "Update image to %IMAGE_TAG%" || echo No changes to commit
-                    git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:main-master
-                    """
-                }
-            }
-        }
+    		steps {
+        withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+            bat """
+            git config user.name "ci-cd-bot"
+            git config user.email "ci-cd-bot@Devops.com"
+
+            git add k8s/spring-boot.yaml
+
+            git diff --cached --quiet && echo "No changes to commit" && exit 0
+
+            git commit -m "Update image to %IMAGE_TAG%"
+
+            git pull origin main-master --rebase
+
+            git push https://%GIT_USER%:%GIT_PASS%@github.com/Sravani0802/SpringBoot-devOps.git HEAD:main-master
+            """
+        		}
+    		}
+	}
     }
 
     post {
