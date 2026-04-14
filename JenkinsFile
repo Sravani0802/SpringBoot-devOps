@@ -17,7 +17,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'master',
+                git branch: 'main-master',
                 url: 'https://github.com/Sravani0802/SpringBoot-devOps.git',
                 credentialsId: 'github-creds'
             }
