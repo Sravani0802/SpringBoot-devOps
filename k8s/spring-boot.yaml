@@ -17,6 +17,13 @@ spec:
           image:  138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:68
           ports:
             - containerPort: 9090
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           env:
             - name: SERVER_PORT
               value: "9090" 
