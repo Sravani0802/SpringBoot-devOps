@@ -64,7 +64,7 @@ pipeline {
         stage('Update K8s Manifest') {
             steps {
                powershell '''
-(Get-Content k8s/spring-boot.yaml) -replace ":TAG", ":$env:IMAGE_TAG" | Set-Content k8s/spring-boot.yaml
+(Get-Content k8s/spring-boot.yaml) -replace ':TAG', ':${IMAGE_TAG}' | Set-Content k8s/spring-boot.yaml
 '''
             }
         }
