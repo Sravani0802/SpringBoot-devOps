@@ -65,7 +65,7 @@ pipeline {
             steps {
                powershell """
         (Get-Content k8s/spring-boot.yaml) `
-        -replace ':TAG', ':$env:IMAGE_TAG' |
+        -replace ':TAG', ':${IMAGE_TAG}' |
         Set-Content k8s/spring-boot.yaml
         """
             }
