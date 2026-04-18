@@ -63,9 +63,11 @@ pipeline {
 
         stage('Update K8s Manifest') {
             steps {
-               powershell '''
-(Get-Content k8s/spring-boot.yaml) -replace 'image:.*', 'image: 138383657739.dkr.ecr.ap-south-1.amazonaws.com/springboot-devops-app:${env:IMAGE_TAG}' | Set-Content k8s/spring-boot.yaml
-'''
+               powershell """
+        (Get-Content k8s/spring-boot.yaml) `
+        -replace ':TAG', ':$env:IMAGE_TAG' |
+        Set-Content k8s/spring-boot.yaml
+        """
             }
         }
 
