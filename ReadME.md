@@ -2,6 +2,18 @@
 
 ##### 
 
+##### **Project Structure**
+
+|           Branch           |                             Project                              |
+
+|----------------------------|------------------------------------------------------------------|
+
+| v2-ai-monitoring           | Phase II — AI-Driven Self-Healing Kubernetes Monitoring Platform |
+
+| v1-springboot-eks-baseline | Phase I — Spring Boot Microservice Deployment (EKS + Terraform + Jenkins) |
+
+
+
 ##### **Overview**
 
 
@@ -397,17 +409,12 @@ deployment.apps/springboot-app restarted
 
 
 
-Kubernetes Cluster Metrics
-
-CPU and Memory Monitoring
-
-HPA Replica Metrics
-
-Pod Health
-
-Node Exporter Metrics
-
-Future Improvements
+* Kubernetes Cluster Metrics
+* CPU and Memory Monitoring
+* HPA Replica Metrics
+* Pod Health
+* Node Exporter Metrics
+* Future Improvements
 
 
 
@@ -415,17 +422,12 @@ Future Improvements
 
 
 
-Prometheus AlertManager integration
-
-Slack/email alerting
-
-Kubernetes CronJob-based healing controller
-
-Predictive anomaly detection
-
-Advanced AI-based failure classification
-
-Key Learnings
+* Prometheus AlertManager integration
+* Slack/email alerting
+* Kubernetes CronJob-based healing controller
+* Predictive anomaly detection
+* Advanced AI-based failure classification
+* Key Learnings
 
 
 
@@ -433,15 +435,10 @@ Key Learnings
 
 
 
-Kubernetes operations
-
-GitOps workflows
-
-Cloud-native observability
-
-Auto-scaling behavior
-
-Fault recovery automation
-
-AI-driven remediation design
+* Kubernetes operations
+* GitOps workflows
+* Cloud-native observability
+* Auto-scaling behavior
+* Fault recovery automation
+* AI-driven remediation design
 
